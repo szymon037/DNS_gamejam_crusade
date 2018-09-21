@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour {
 	private float oldMove = 0;
 	private GameObject player = null;
 
+	private float x = 0f;
+    private float z = 0f;
 
 	void Start () {
 		posY = this.transform.position.y;
@@ -34,7 +36,15 @@ public class PlayerMovement : MonoBehaviour {
 
 			oldMove = move;
 
-		player.transform.position = this.transform.position;
+		x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * currentSpeed;
+        z = Input.GetAxisRaw("Vertical") * Time.deltaTime * currentSpeed;
+
+        transform.Translate(x, 0, z);
+
+
+
+
+		/*player.transform.position = this.transform.position;
 		time += Time.deltaTime;
 		if (Input.GetKey(KeyCode.W)){
 			this.transform.position += Vector3.forward * Time.deltaTime * currentSpeed;
@@ -51,7 +61,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		else if(Input.GetKey(KeyCode.D)){
 			this.transform.position += Vector3.right * Time.deltaTime* currentSpeed;
-		}
+		}*/
 
 		if(isMoving)
 			transform.position = new Vector3(this.transform.position.x , (posY + amplitude * Mathf.Sin(period * time)), this.transform.position.z);
