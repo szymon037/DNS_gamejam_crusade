@@ -11,7 +11,7 @@ public class WeaponBehaviour : MonoBehaviour {
 	public List<Weapon> weaponScripts = new List<Weapon>();
 	public Weapon activeWeaponScript = null;
 	private int index = 0;
-	public Text ammoCount = null;
+	
 	// Use this for initialization
 	void Start () {
 		weaponObjects.ForEach(obj => weaponScripts.Add(obj.GetComponent<Weapon>()));
