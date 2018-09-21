@@ -7,6 +7,12 @@ public class Pig : MonoBehaviour {
 	public float health = 0f;
 	public GameObject bacon = null;
 
+
+	void Awake() {
+		float scale = Random.Range(3f, 4.5f);
+		this.transform.localScale = new Vector3(scale, scale, scale);
+	}
+
 	void Update() {
 		if (health <= 0f) {
 			Die();

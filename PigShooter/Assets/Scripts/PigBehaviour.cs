@@ -17,6 +17,12 @@ public class PigBehaviour : MonoBehaviour {
 	void Update () {
 		if (!scriptRef.powerUpBase[PlayerScript.PowerUps.freeze]) {
 			transform.position = Vector3.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+			transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
+			transform.LookAt(player.transform);
+			transform.rotation = Quaternion.Euler( new Vector3(-90f, transform.eulerAngles.y, transform.eulerAngles.z));
+			transform.rotation = Quaternion.Euler( new Vector3(-90f, transform.eulerAngles.y + 90f, transform.eulerAngles.z));
 		}
 	}
+
+
 }

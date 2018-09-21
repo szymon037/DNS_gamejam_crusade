@@ -25,7 +25,7 @@ public class WeaponBehaviour : MonoBehaviour {
 	void Update () {
 		if (Input.GetMouseButton(0) && activeWeaponScript.shotTimer <= 0f) {
 			if (activeWeaponScript.currentAmmoCount <= 0) {
-				activeWeaponScript.Reload();
+				//activeWeaponScript.Reload();/*jebnąć tekstem kurwo przeładuj*/
 			}
 			else activeWeaponScript.Shoot();
 		}
@@ -46,6 +46,9 @@ public class WeaponBehaviour : MonoBehaviour {
 			activeWeapon = weaponObjects[2];
 			activeWeapon.SetActive(true);
 			activeWeaponScript = weaponScripts[2];
+		}
+		if (Input.GetKeyDown(KeyCode.R) && activeWeaponScript.currentAmmoCount != activeWeaponScript.magCapacity) {
+			activeWeaponScript.Reload();
 		}
 	}
 }

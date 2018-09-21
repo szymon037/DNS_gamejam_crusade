@@ -14,10 +14,9 @@ public class PlayerScript : MonoBehaviour {
 	public Dictionary<PowerUps, bool> powerUpBase = new Dictionary<PowerUps, bool>();
 	public float freezeTimer = 0f;
 	public float speedUpTimer = 0f;
-	public Transform startPoint = null;
+	
 	void Start() {
 		FillPowerUpDictionary();
-		this.transform.position = startPoint.position;
 	}
 
 	void Update() {

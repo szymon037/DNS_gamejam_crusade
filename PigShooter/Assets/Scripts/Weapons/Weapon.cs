@@ -8,11 +8,13 @@ public class Weapon : MonoBehaviour {
 	public int currentAmmoCount = 0;
 	public int ammoCount = 0;
 	public float reloadTimer = 0f;
+	public float reloadDelay = 0f;
 	public float shotDelay = 0f;
 	public float shotTimer = 0f;
 	public float damage = 0f;
 	public float shakeValue = 0.03f;
 	public Transform shootPoint = null;
+	public Transform cameraTransform = null;
 	public GameObject cameraToShake = null;
 	public Vector3 cameraPosition = Vector3.zero;
 

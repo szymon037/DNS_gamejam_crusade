@@ -17,12 +17,13 @@ public class PlayerMovement : MonoBehaviour {
 	private float move = 0;
 	private float oldMove = 0;
 	private GameObject player = null;
-
+	public Transform startPoint = null;
 
 	void Start () {
 		posY = this.transform.position.y;
 		currentSpeed = speed;
 		player = GameObject.FindGameObjectWithTag("Player");
+		this.transform.position = startPoint.position;
 	}
 	
 	void Update () {

@@ -10,6 +10,7 @@ public class Shotgun : Weapon {
 	// Use this for initialization
 	void Start () {
 		this.shotDelay = 0.33f;
+		cameraTransform = cameraToShake.transform;
 	}
 	
 	// Update is called once per frame
@@ -17,16 +18,20 @@ public class Shotgun : Weapon {
 		if (this.shotTimer > 0f) {
 			this.shotTimer -= Time.deltaTime;
 		}
+		if (this.reloadTimer > 0f) {
+			this.reloadTimer -= Time.deltaTime;
+		}
 	}
 
 	public override void Shoot() {
+		if (reloadTimer > 0f) return;
 		this.shotTimer = this.shotDelay;
 		//RaycastHit hit = Physics.Raycast();
 		int pelletCount = Random.Range(minPellets, maxPellets);
 		RaycastHit hit;
 		bool enemyIsHit = false;
 		for (int i = 0; i < pelletCount; ++i) {
-			enemyIsHit = Physics.Raycast(this.shootPoint.position, Vector3.forward, out hit, Mathf.Infinity);
+			enemyIsHit = Physics.Raycast(this.shootPoint.position, cameraTransform.forward, out hit, Mathf.Infinity);
 			if (hit.transform != null) {
 				if (hit.transform.gameObject.CompareTag("Pig")) {
 					hit.transform.gameObject.GetComponent<Pig>().ReduceHealth(this.damage);
@@ -39,6 +44,7 @@ public class Shotgun : Weapon {
 
 	public override void Reload() {
 		if (currentAmmoCount == magCapacity) return;
+		reloadTimer = reloadDelay;
 		if (ammoCount < magCapacity) {
 			currentAmmoCount = ammoCount;
 			ammoCount = 0;
@@ -48,6 +54,7 @@ public class Shotgun : Weapon {
 			int temp = magCapacity - currentAmmoCount;
 			ammoCount -= temp;
 			currentAmmoCount = magCapacity;
+			return;
 		}
 		currentAmmoCount = magCapacity;
 		ammoCount -= magCapacity;
