@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour {
 	public float damage = 0f;
 	public float shakeValue = 0.03f;
 	public Transform shootPoint = null;
-	public GameObject camera = null;
+	public GameObject cameraToShake = null;
 	public Vector3 cameraPosition = Vector3.zero;
 
 	public virtual void Shoot() {
@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour {
 	}
 
 	public void Shake() {
-		cameraPosition = camera.transform.position;
+		cameraPosition = cameraToShake.transform.position;
 		int shakes = Random.Range(10, 20);
 		for (int i = 0; i < shakes; ++i) {
 			transform.position = new Vector3(
@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour {
 				transform.position.z + Random.Range(-this.shakeValue, this.shakeValue)
 			);
 		}
-		camera.transform.position = cameraPosition;
+		cameraToShake.transform.position = cameraPosition;
 	}
 
 

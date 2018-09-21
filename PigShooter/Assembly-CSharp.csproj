@@ -53,7 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Pig.cs" />
+     <Compile Include="Assets\Scripts\BaconBehaviour.cs" />
+     <Compile Include="Assets\Scripts\PigBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Pigs\Pig.cs" />
+     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\Powerups\FreezePowerUp.cs" />
      <Compile Include="Assets\Scripts\WeaponBehaviour.cs" />
      <Compile Include="Assets\Scripts\Weapons\AssaultRifle.cs" />
      <Compile Include="Assets\Scripts\Weapons\Pistol.cs" />
