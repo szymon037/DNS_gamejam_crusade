@@ -32,6 +32,7 @@ public class Shotgun : Weapon {
 					hit.transform.gameObject.GetComponent<Pig>().ReduceHealth(this.damage);
 				}
 			}
+			Debug.DrawRay(this.shootPoint.position, Vector3.forward, Color.red, 20f);
 		}
 		Shake();
 	}

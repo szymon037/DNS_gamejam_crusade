@@ -53,6 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AmmoPickups\Pistolammo.cs" />
+     <Compile Include="Assets\Scripts\AmmoPickups\Rifleammo.cs" />
+     <Compile Include="Assets\Scripts\AmmoPickups\Shotgunammo.cs" />
      <Compile Include="Assets\Scripts\BaconBehaviour.cs" />
      <Compile Include="Assets\Scripts\PigBehaviour.cs" />
      <Compile Include="Assets\Scripts\Pigs\Pig.cs" />

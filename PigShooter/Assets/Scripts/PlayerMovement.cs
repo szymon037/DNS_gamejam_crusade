@@ -16,11 +16,13 @@ public class PlayerMovement : MonoBehaviour {
 	public bool isMoving = false;
 	private float move = 0;
 	private float oldMove = 0;
+	private GameObject player = null;
 
 
 	void Start () {
 		posY = this.transform.position.y;
 		currentSpeed = speed;
+		player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	void Update () {
@@ -32,7 +34,7 @@ public class PlayerMovement : MonoBehaviour {
 
 			oldMove = move;
 
-
+		player.transform.position = this.transform.position;
 		time += Time.deltaTime;
 		if (Input.GetKey(KeyCode.W)){
 			this.transform.position += Vector3.forward * Time.deltaTime * currentSpeed;
