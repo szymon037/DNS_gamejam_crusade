@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour {
         z = Input.GetAxisRaw("Vertical") * Time.deltaTime * currentSpeed;
 
         transform.Translate(x, 0, z);
-
+        player.transform.position = this.transform.position;
 
 
 

@@ -28,7 +28,7 @@ public class PlayerScript : MonoBehaviour {
 		FillPowerUpDictionary();
 		this.transform.position = startPoint.position;
 		script = GetComponent<WeaponBehaviour>();
-
+		this.health = this.maxHealth;
 	
 
 	}
@@ -48,8 +48,11 @@ public class PlayerScript : MonoBehaviour {
 		fillAmount = health / maxHealth;
 		healthImage.fillAmount = fillAmount; 
 
-		ammoCount.text = script.activeWeaponScript.currentAmmoCount.ToString();
+		if (ammoCount != null && script != null && script.activeWeaponScript != null) {
+			ammoCount.text = script.activeWeaponScript.currentAmmoCount.ToString();
+		}
 
+		if (this.health > this.maxHealth) this.health = this.maxHealth;
 	}
 
 	public void FillPowerUpDictionary() {
