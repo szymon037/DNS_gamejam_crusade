@@ -20,8 +20,12 @@ public class PlayerScript : MonoBehaviour {
 	public Transform startPoint = null;
 	private float fillAmount = 1f;
 	public Image healthImage = null;
-	public Text ammoCount = null;
+	public Text ammoCountInMagazine = null;
+	public Text ammoCountTotal = null;
+	public Text slash = null;
 	public WeaponBehaviour script = null;
+	private Color blackColor = Color.black;
+	private Color redColor = Color.red;
 
 
 	void Start() {
@@ -46,9 +50,33 @@ public class PlayerScript : MonoBehaviour {
 		fillAmount = health / maxHealth;
 		healthImage.fillAmount = fillAmount; 
 
-		if (ammoCount != null && script != null && script.activeWeaponScript != null) {
-			ammoCount.text = script.activeWeaponScript.currentAmmoCount.ToString();
+		if (ammoCountTotal != null && script != null && script.activeWeaponScript != null) {
+			ammoCountTotal.text = script.activeWeaponScript.ammoCount.ToString();
 		}
+
+		if (ammoCountInMagazine != null && script != null && script.activeWeaponScript != null) {
+			ammoCountInMagazine.text = script.activeWeaponScript.currentAmmoCount.ToString();
+		}
+
+		if(script.activeWeaponScript.ammoCount == 0){
+			ammoCountTotal.color = redColor;
+
+			if(script.activeWeaponScript.currentAmmoCount == 0)
+			{
+				ammoCountInMagazine.color = redColor;
+				slash.color = redColor;
+			}
+		}
+
+		
+	
+		else
+		{
+			ammoCountTotal.color = blackColor;
+			ammoCountInMagazine.color = blackColor;
+			slash.color = blackColor;
+		}
+
 
 		if (this.health > this.maxHealth) this.health = this.maxHealth;
 	}
