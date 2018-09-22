@@ -21,12 +21,15 @@ public class Pistol : Weapon {
 
 	public override void Shoot() {
 		if (reloadTimer > 0f) return;
+		if (shotTimer > 0f) return;
 		this.shotTimer = this.shotDelay;
 		--this.currentAmmoCount;
 		RaycastHit hit;
-		bool hitTheEnemy = Physics.Raycast(this.shootPoint.position, cameraTransform.forward, out hit, Mathf.Infinity);
+		bool hitTheEnemy = Physics.Raycast(this.shootPoint.position, Camera.main.transform.forward * this.range, out hit, this.range);
+		Debug.DrawRay(this.shootPoint.position, Camera.main.transform.forward * this.range, Color.red, this.range);
 		if (!hitTheEnemy) return;
 		if (hit.transform != null) {
+			Debug.Log(hit.transform.gameObject.tag);
 			if (hit.transform.CompareTag("Pig")) {
 				/*obsługa obrażeń*/
 				hit.transform.gameObject.GetComponent<Pig>().ReduceHealth(this.damage);
@@ -37,6 +40,7 @@ public class Pistol : Weapon {
 
 	public override void Reload() {
 		if (currentAmmoCount == magCapacity) return;
+		Debug.Log("Reloading");
 		reloadTimer = reloadDelay;
 		if (ammoCount < magCapacity) {
 			currentAmmoCount = ammoCount;
