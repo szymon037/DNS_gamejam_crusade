@@ -9,6 +9,7 @@ public class FreezePowerUp : MonoBehaviour {
 	void OnCollisionEnter(Collision other) {
 		if (other.gameObject.CompareTag("Player")) {
 			other.gameObject.GetComponent<PlayerScript>().EnablePowerUpEffect(this.id);
+			Destroy(this.gameObject);
 		}
 	}
 }

@@ -7,6 +7,7 @@ public class AssaultRifle : Weapon {
 	public AudioSource[] sounds = null;
 	public Transform reloadSoundHub = null;
 	private int i = 0;
+	public PlayerScript script = null;
 	void Start () {
 		this.shotDelay = 0.1f;
 		cameraTransform = cameraToShake.transform;
@@ -16,6 +17,7 @@ public class AssaultRifle : Weapon {
 			source.volume = 0.35f;
 		}
 		reloadSound = reloadSoundHub.gameObject.GetComponent<AudioSource>();
+		script = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
 	}
 	
 	// Update is called once per frame
@@ -27,8 +29,6 @@ public class AssaultRifle : Weapon {
 			this.reloadTimer -= Time.deltaTime;
 		}
 		if (muzzleTimer > 0f) muzzleTimer -= Time.deltaTime;
-		else {
-		}
 	}
 
 	public override void Shoot() {
@@ -39,7 +39,7 @@ public class AssaultRifle : Weapon {
 		if (i >= sounds.Length) i = 0;
 		sounds[i++].Play();
 		this.shotTimer = this.shotDelay;
-		--this.currentAmmoCount;
+		if (!script.powerUpBase[PlayerScript.PowerUps.infiniteAmmo]) --this.currentAmmoCount;
 		RaycastHit hit;
 		bool hitTheEnemy = Physics.Raycast(this.shootPoint.position, Camera.main.transform.forward * this.range, out hit, this.range);
 		//Debug.DrawRay(this.shootPoint.position, Camera.main.transform.forward * this.range, Color.red, this.range);
@@ -55,9 +55,9 @@ public class AssaultRifle : Weapon {
 
 	public override void Reload() {
 		if (currentAmmoCount == magCapacity) return;
+		if (currentAmmoCount == 0 && ammoCount == 0) return;
 		reloadSound.Play();
 		i = 0;
-		Debug.Log("Reloading");
 		reloadTimer = reloadDelay;
 		if (ammoCount < magCapacity) {
 			currentAmmoCount = ammoCount;

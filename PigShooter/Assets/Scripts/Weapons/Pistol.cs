@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pistol : Weapon {
-	public GameObject currentSprite = null;
-	public List<GameObject> flashSprites = new List<GameObject>();
-	// Use this for initialization
+
+	public PlayerScript script = null;
+
 	void Start () {
 		this.shotDelay = 0.25f;
 		cameraTransform = cameraToShake.transform;
 		soundSource.volume = 0.6f;
 		reloadSound.volume = 0.9f;	
-		int tempIt = 0;
-		foreach (Transform child in muzzleFlash.transform) {
-			flashSprites.Add(child.gameObject);
-			flashSprites[tempIt++].SetActive(false);
-		}
-
+		script = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
 	}
 	
 	// Update is called once per frame
@@ -28,11 +23,6 @@ public class Pistol : Weapon {
 			this.reloadTimer -= Time.deltaTime;
 		}
 		if (muzzleTimer > 0f) muzzleTimer -= Time.deltaTime;
-		else {
-			if (currentSprite != null) {
-				currentSprite.SetActive(false);
-			}
-		}
 	}
 
 	public override void Shoot() {
@@ -41,7 +31,7 @@ public class Pistol : Weapon {
 		muzzleFlash.gameObject.GetComponent<MuzzleFlash>().ps.Play();
 		muzzleTimer = 0.3f;
 		this.shotTimer = this.shotDelay;
-		--this.currentAmmoCount;
+		if (!script.powerUpBase[PlayerScript.PowerUps.infiniteAmmo]) --this.currentAmmoCount;
 		RaycastHit hit;
 		soundSource.Play();
 		bool hitTheEnemy = Physics.Raycast(this.shootPoint.position, Camera.main.transform.forward * this.range, out hit, this.range);
@@ -58,7 +48,7 @@ public class Pistol : Weapon {
 
 	public override void Reload() {
 		if (currentAmmoCount == magCapacity) return;
-		Debug.Log("Reloading");
+		if (currentAmmoCount == 0 && ammoCount == 0) return;
 		reloadSound.Play();
 		reloadTimer = reloadDelay;
 		if (ammoCount < magCapacity) {

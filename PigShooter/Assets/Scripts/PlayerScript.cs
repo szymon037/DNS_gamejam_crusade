@@ -9,19 +9,23 @@ public class PlayerScript : MonoBehaviour {
 
 	public enum PowerUps {
 		speedUp = 0,
-		freeze
+		freeze,
+		infiniteAmmo
 	}
 
 	public float maxHealth = 100.0f;
 	public float health = 100.0f;
 	public Dictionary<PowerUps, bool> powerUpBase = new Dictionary<PowerUps, bool>();
 	public float freezeTimer = 0f;
+	public float infiniteAmmoTimer = 0f;
 	public float speedUpTimer = 0f;
 	public Transform startPoint = null;
+	public GameObject gamemanager = null;
 	private float fillAmount = 1f;
 	public Image healthImage = null;
 	public Text ammoCount = null;
 	public WeaponBehaviour script = null;
+	public static int playerScore = 0;
 
 
 	void Start() {
@@ -41,6 +45,11 @@ public class PlayerScript : MonoBehaviour {
 			freezeTimer -= Time.deltaTime;
 		} else {
 			powerUpBase[PowerUps.freeze] = false;
+		}
+		if (infiniteAmmoTimer > 0f) {
+			infiniteAmmoTimer -= Time.deltaTime;
+		} else {
+			powerUpBase[PowerUps.infiniteAmmo] = false;
 		}
 
 		fillAmount = health / maxHealth;
@@ -68,6 +77,18 @@ public class PlayerScript : MonoBehaviour {
 				freezeTimer = 4f;
 				powerUpBase[id] = true;
 				break;
+			case PowerUps.infiniteAmmo:
+				infiniteAmmoTimer = 10f;
+				WeaponBehaviour script = gameObject.GetComponent<WeaponBehaviour>();
+				script.activeWeaponScript.currentAmmoCount = script.activeWeaponScript.magCapacity;
+				powerUpBase[id] = true;
+				break;
 		}
+	}
+
+	public void Die() {
+		GameManager.SavePoints();
+		DontDestroyOnLoad(gamemanager);
+		UnityEngine.SceneManagement.SceneManager.LoadScene("LostGame");
 	}
 }

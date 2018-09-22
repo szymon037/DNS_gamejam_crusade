@@ -7,10 +7,12 @@ public class Shotgun : Weapon {
 	public int minPellets = 0;
 	public int maxPellets = 0;
 	public float spreadValue = 0.5f;
+	public PlayerScript script = null;
 	// Use this for initialization
 	void Start () {
 		this.shotDelay = 1.5f;
 		cameraTransform = cameraToShake.transform;
+		script = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
 	}
 	
 	// Update is called once per frame
@@ -22,9 +24,6 @@ public class Shotgun : Weapon {
 			this.reloadTimer -= Time.deltaTime;
 		}
 		if (muzzleTimer > 0f) muzzleTimer -= Time.deltaTime;
-		else {
-
-		}
 	}
 
 	public override void Shoot() {
@@ -35,7 +34,7 @@ public class Shotgun : Weapon {
 		muzzleFlash.gameObject.GetComponent<MuzzleFlash>().ps.Play();
 		//RaycastHit hit = Physics.Raycast();
 		if (this.gameObject.activeSelf) soundSource.Play();
-		--this.currentAmmoCount;
+		if (!script.powerUpBase[PlayerScript.PowerUps.infiniteAmmo]) --this.currentAmmoCount;
 		int pelletCount = Random.Range(minPellets, maxPellets);
 		RaycastHit hit;
 		bool enemyIsHit = false;
@@ -58,7 +57,7 @@ public class Shotgun : Weapon {
 
 	public override void Reload() {
 		if (currentAmmoCount == magCapacity) return;
-		Debug.Log("Reloading");
+		if (currentAmmoCount == 0 && ammoCount == 0) return;
 		reloadSound.Play();
 		reloadTimer = reloadDelay;
 		if (ammoCount < magCapacity) {

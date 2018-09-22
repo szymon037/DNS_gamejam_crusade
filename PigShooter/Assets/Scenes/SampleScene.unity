@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -149,8 +149,10 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   freezeTimer: 0
+  infiniteAmmoTimer: 0
   speedUpTimer: 0
   startPoint: {fileID: 1230740069}
+  gamemanager: {fileID: 0}
   healthImage: {fileID: 766103868}
   ammoCount: {fileID: 1577571459}
   script: {fileID: 0}
@@ -239,12 +241,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.25840667, y: 1.02, z: 5.4699993}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1651627339}
-  - {fileID: 2140855746}
-  - {fileID: 1212068451}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &149708313
 MonoBehaviour:
@@ -352,6 +351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 174633341}
+  - component: {fileID: 174633342}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -370,8 +370,27 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &174633342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 174633340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa6fdbebcd7e10418c3f477ae08a567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpSpawnPoints: []
+  player: {fileID: 0}
+  pigsToSpawn: []
+  enemyAmount: 0
+  levelTag: 1
+  minEnemyAmount: 10
+  minPowerUpAmount: 3
+  killedAllEnemies: 0
 --- !u!1 &424054297
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,9 +481,10 @@ RectTransform:
   - {fileID: 1393228833}
   - {fileID: 892233445}
   - {fileID: 1577571458}
-  - {fileID: 2080855925}
+  - {fileID: 701699456}
+  - {fileID: 474777304}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -554,7 +574,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 0.2
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -5157,6 +5177,7 @@ MonoBehaviour:
   cameraPosition: {x: 0, y: 0, z: 0}
   sounds: []
   reloadSoundHub: {fileID: 1353892978}
+  script: {fileID: 0}
 --- !u!82 &474777306
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5424,7 +5445,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &534669906
 MonoBehaviour:
@@ -5493,6 +5514,7 @@ MonoBehaviour:
   minPellets: 5
   maxPellets: 10
   spreadValue: 0.2
+  script: {fileID: 0}
 --- !u!82 &701699458
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5917,52 +5939,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 892233444}
   m_CullTransparentMesh: 0
---- !u!1001 &961655798
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400010, guid: 9253611e20ca63541b98dd58ec771971, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.4857829
-      objectReference: {fileID: 0}
-    - target: {fileID: 400010, guid: 9253611e20ca63541b98dd58ec771971, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.1154634e-18
-      objectReference: {fileID: 0}
-    - target: {fileID: 400010, guid: 9253611e20ca63541b98dd58ec771971, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.4959766
-      objectReference: {fileID: 0}
-    - target: {fileID: 400010, guid: 9253611e20ca63541b98dd58ec771971, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400010, guid: 9253611e20ca63541b98dd58ec771971, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400010, guid: 9253611e20ca63541b98dd58ec771971, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400010, guid: 9253611e20ca63541b98dd58ec771971, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400010, guid: 9253611e20ca63541b98dd58ec771971, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100010, guid: 9253611e20ca63541b98dd58ec771971, type: 3}
-      propertyPath: m_TagString
-      value: Pig
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9253611e20ca63541b98dd58ec771971, type: 3}
-  m_IsPrefabAsset: 0
 --- !u!1001 &1212068449
 Prefab:
   m_ObjectHideFlags: 0
@@ -6080,8 +6056,7 @@ MonoBehaviour:
   reloadSound: {fileID: 1212068453}
   muzzleFlash: {fileID: 2039494179}
   cameraPosition: {x: 0, y: 0, z: 0}
-  currentSprite: {fileID: 0}
-  flashSprites: []
+  script: {fileID: 0}
 --- !u!82 &1212068453
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6298,7 +6273,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1247554473
 GameObject:
@@ -7794,7 +7769,7 @@ Transform:
   m_LocalScale: {x: 5.7038, y: 1.2835, z: 10.35958}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1361120137
 Prefab:
@@ -7943,7 +7918,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 180d4a1809beba542a86fec5aaf8f671, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 180d4a1809beba542a86fec5aaf8f671, type: 3}
       propertyPath: m_LocalScale.x
@@ -7964,36 +7939,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 180d4a1809beba542a86fec5aaf8f671, type: 3}
   m_IsPrefabAsset: 0
---- !u!1 &1393072224 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100010, guid: 9253611e20ca63541b98dd58ec771971,
-    type: 3}
-  m_PrefabInternal: {fileID: 961655798}
---- !u!65 &1393072227
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1393072224}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.4459295, y: 2.8873312, z: 3.447455}
-  m_Center: {x: -0.7574121, y: 0.9436656, z: 0.13577008}
---- !u!114 &1393072228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1393072224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a49670e509cadad4e94fd48e630314c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 150
-  bacon: {fileID: 0}
 --- !u!1 &1393228832
 GameObject:
   m_ObjectHideFlags: 0
@@ -8137,7 +8082,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 0.2
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -12727,7 +12672,7 @@ Transform:
   m_LocalScale: {x: 0.39817262, y: 0.39817262, z: 0.39817262}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1547526328
 Camera:
@@ -13073,7 +13018,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1915863217
 GameObject:
@@ -13233,7 +13178,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 0.2
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2

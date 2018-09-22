@@ -8,7 +8,6 @@ public class MuzzleFlash : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ps = GetComponent<ParticleSystem>();
-		Debug.LogWarning(ps);
 	}
 	
 	// Update is called once per frame

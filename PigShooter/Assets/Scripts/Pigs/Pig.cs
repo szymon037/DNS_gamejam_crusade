@@ -6,11 +6,14 @@ public class Pig : MonoBehaviour {
 
 	public float health = 0f;
 	public GameObject bacon = null;
-
+	public int scoreValue = 0;
+	public float damage = 0f;
+	public AudioSource pigSqueal = null;
 
 	void Awake() {
 		float scale = Random.Range(3f, 4.5f);
 		this.transform.localScale = new Vector3(scale, scale, scale);
+
 	}
 
 	void Update() {
@@ -32,6 +35,15 @@ public class Pig : MonoBehaviour {
 				temp.transform.eulerAngles = new Vector3(temp.transform.position.x + Random.Range(0, 180f), temp.transform.position.y + Random.Range(0, 180f), temp.transform.position.z + Random.Range(0, 180f));
 			}
 		}
+		--GameManager.enemyCounter;
+		PlayerScript.playerScore += this.scoreValue;
 		Destroy(this.gameObject);
+	}
+
+	void OnCollisionEnter(Collision other) {
+		if (other.gameObject.CompareTag("Player")) {
+			other.gameObject.GetComponent<PlayerScript>().health -= this.damage;
+			pigSqueal.Play();
+		}
 	}
 }
