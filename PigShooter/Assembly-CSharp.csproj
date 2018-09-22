@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\AmmoPickups\Pistolammo.cs" />
      <Compile Include="Assets\Scripts\AmmoPickups\Rifleammo.cs" />
      <Compile Include="Assets\Scripts\AmmoPickups\Shotgunammo.cs" />
+     <Compile Include="Assets\Scripts\AudioBehaviour.cs" />
      <Compile Include="Assets\Scripts\BaconBehaviour.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\CameraRotation.cs" />
@@ -67,6 +68,7 @@
      <Compile Include="Assets\Scripts\Powerups\FreezePowerUp.cs" />
      <Compile Include="Assets\Scripts\WeaponBehaviour.cs" />
      <Compile Include="Assets\Scripts\Weapons\AssaultRifle.cs" />
+     <Compile Include="Assets\Scripts\Weapons\MuzzleFlash.cs" />
      <Compile Include="Assets\Scripts\Weapons\Pistol.cs" />
      <Compile Include="Assets\Scripts\Weapons\Shotgun.cs" />
      <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />

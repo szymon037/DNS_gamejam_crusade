@@ -29,8 +29,6 @@ public class PlayerScript : MonoBehaviour {
 		this.transform.position = startPoint.position;
 		script = GetComponent<WeaponBehaviour>();
 		this.health = this.maxHealth;
-	
-
 	}
 
 	void Update() {

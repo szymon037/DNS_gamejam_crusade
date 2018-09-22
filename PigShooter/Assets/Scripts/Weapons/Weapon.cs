@@ -14,10 +14,13 @@ public class Weapon : MonoBehaviour {
 	public float damage = 0f;
 	public float shakeValue = 0.03f;
 	public float range = 0f;
+	public float muzzleTimer = 0f;
 	public Transform shootPoint = null;
 	public Transform cameraTransform = null;
 	public GameObject cameraToShake = null;
-	public AudioClip shootingSound = null;
+	public AudioSource soundSource = null;
+	public AudioSource reloadSound = null;
+	public GameObject muzzleFlash = null;
 	public Vector3 cameraPosition = Vector3.zero;
 
 	public virtual void Shoot() {
