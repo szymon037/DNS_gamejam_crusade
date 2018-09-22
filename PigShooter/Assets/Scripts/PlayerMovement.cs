@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour {
 			this.transform.position += Vector3.right * Time.deltaTime* currentSpeed;
 		}*/
 
-		if(isMoving)
-			transform.position = new Vector3(this.transform.position.x , (posY + amplitude * Mathf.Sin(period * time)), this.transform.position.z);
+		// if(isMoving)
+		// 	transform.position = new Vector3(this.transform.position.x , (posY + amplitude * Mathf.Sin(period * time)), this.transform.position.z);
 	}
 }

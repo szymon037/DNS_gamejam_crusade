@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\AmmoPickups\Rifleammo.cs" />
      <Compile Include="Assets\Scripts\AmmoPickups\Shotgunammo.cs" />
      <Compile Include="Assets\Scripts\BaconBehaviour.cs" />
+     <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\CameraRotation.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\PigBehaviour.cs" />

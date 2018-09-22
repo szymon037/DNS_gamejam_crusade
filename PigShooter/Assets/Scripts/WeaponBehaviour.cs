@@ -11,7 +11,7 @@ public class WeaponBehaviour : MonoBehaviour {
 	public List<Weapon> weaponScripts = new List<Weapon>();
 	public Weapon activeWeaponScript = null;
 	private int index = 0;
-	
+	private bool isShooting = false;
 	// Use this for initialization
 	void Start () {
 		weaponObjects.ForEach(obj => weaponScripts.Add(obj.GetComponent<Weapon>()));
@@ -24,10 +24,8 @@ public class WeaponBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButton(0) && activeWeaponScript.shotTimer <= 0f) {
-			if (activeWeaponScript.currentAmmoCount <= 0) {
-				//activeWeaponScript.Reload();/*jebnąć tekstem kurwo przeładuj*/
-			}
-			else activeWeaponScript.Shoot();
+			if (activeWeaponScript.currentAmmoCount > 0) activeWeaponScript.Shoot();
+			else activeWeaponScript.Reload();	
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha1) && activeWeapon != weaponObjects[0]) {
 			activeWeapon.SetActive(false);

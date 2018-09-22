@@ -6,7 +6,7 @@ public class AssaultRifle : Weapon {
 
 	// Use this for initialization
 	void Start () {
-		this.shotDelay = 0.05f;
+		this.shotDelay = 0.1f;
 		cameraTransform = cameraToShake.transform;
 	}
 	
@@ -22,13 +22,16 @@ public class AssaultRifle : Weapon {
 
 	public override void Shoot() {
 		if (reloadTimer > 0f) return;
+		if (shotTimer > 0f) return;
 		this.shotTimer = this.shotDelay;
-		--this.ammoCount;
+		--this.currentAmmoCount;
 		RaycastHit hit;
-		bool hitTheEnemy = Physics.Raycast(this.shootPoint.position, cameraTransform.forward, out hit, Mathf.Infinity);
+		bool hitTheEnemy = Physics.Raycast(this.shootPoint.position, Camera.main.transform.forward * this.range, out hit, this.range);
+		Debug.DrawRay(this.shootPoint.position, Camera.main.transform.forward * this.range, Color.red, this.range);
 		if (!hitTheEnemy) return;
 		if (hit.transform != null) {
 			if (hit.transform.CompareTag("Pig")) {
+				Debug.Log(hit.transform.gameObject.tag);
 				/*obsługa obrażeń*/
 				hit.transform.gameObject.GetComponent<Pig>().ReduceHealth(this.damage);
 			}
@@ -38,6 +41,7 @@ public class AssaultRifle : Weapon {
 
 	public override void Reload() {
 		if (currentAmmoCount == magCapacity) return;
+		Debug.Log("Reloading");
 		reloadTimer = reloadDelay;
 		if (ammoCount < magCapacity) {
 			currentAmmoCount = ammoCount;

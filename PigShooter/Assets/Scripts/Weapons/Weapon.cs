@@ -13,9 +13,11 @@ public class Weapon : MonoBehaviour {
 	public float shotTimer = 0f;
 	public float damage = 0f;
 	public float shakeValue = 0.03f;
+	public float range = 0f;
 	public Transform shootPoint = null;
 	public Transform cameraTransform = null;
 	public GameObject cameraToShake = null;
+	public AudioClip shootingSound = null;
 	public Vector3 cameraPosition = Vector3.zero;
 
 	public virtual void Shoot() {
