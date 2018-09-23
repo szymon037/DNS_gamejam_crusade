@@ -15,7 +15,9 @@ public class CameraRotation : MonoBehaviour {
 			player.transform.Rotate(0f, Input.GetAxis("Mouse X") * rotationSpeed, 0f);
 		}
 		transform.rotation = Quaternion.Euler(transform.eulerAngles.x, player.transform.eulerAngles.y, player.transform.eulerAngles.z);
-		player.transform.rotation = Quaternion.Euler(transform.eulerAngles.x, player.transform.eulerAngles.y, 0f);
+
+		//player.transform.rotation = Quaternion.Euler(transform.eulerAngles.x, player.transform.eulerAngles.y, 0f);
+		
 		if (Input.GetAxis("Mouse Y") != 0f) {
 			transform.Rotate(-Input.GetAxis("Mouse Y") * rotationSpeed, 0f, 0f);
 		}
