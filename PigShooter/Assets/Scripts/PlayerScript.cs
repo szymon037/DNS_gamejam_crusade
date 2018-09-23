@@ -15,7 +15,7 @@ public class PlayerScript : MonoBehaviour {
 
 	public float maxHealth = 100.0f;
 	public float health = 100.0f;
-	public Dictionary<PowerUps, bool> powerUpBase = new Dictionary<PowerUps, bool>();
+	public static Dictionary<PowerUps, bool> powerUpBase = new Dictionary<PowerUps, bool>();
 	public float freezeTimer = 0f;
 	public float infiniteAmmoTimer = 0f;
 	public float speedUpTimer = 0f;
@@ -26,10 +26,15 @@ public class PlayerScript : MonoBehaviour {
 	public Text ammoCountInMagazine = null;
 	public Text ammoCountTotal = null;
 	public Text slash = null;
+	public Text points = null;
 	public WeaponBehaviour script = null;
 	private Color blackColor = Color.black;
 	private Color redColor = Color.red;
+	public bool isHit = false;
+	public float hitTimer = 0f;
 	public static int playerScore = 0;
+	private bool reducedSpeed = false;
+	public AudioSource OOF = null;
 
 
 	void Start() {
@@ -37,6 +42,7 @@ public class PlayerScript : MonoBehaviour {
 		this.transform.position = startPoint.position;
 		script = GetComponent<WeaponBehaviour>();
 		this.health = this.maxHealth;
+		OOF = GetComponent<AudioSource>();
 	}
 
 	void Update() {
@@ -44,6 +50,10 @@ public class PlayerScript : MonoBehaviour {
 			speedUpTimer -= Time.deltaTime;
 		} else {
 			powerUpBase[PowerUps.speedUp] = false;
+			if (!reducedSpeed) {
+				GetComponent<PlayerMovement>().speed -= 2f;
+				reducedSpeed = true;
+			}
 		}
 		if (freezeTimer > 0f) {
 			freezeTimer -= Time.deltaTime;
@@ -54,6 +64,11 @@ public class PlayerScript : MonoBehaviour {
 			infiniteAmmoTimer -= Time.deltaTime;
 		} else {
 			powerUpBase[PowerUps.infiniteAmmo] = false;
+		}
+		if (hitTimer > 0f) {
+			hitTimer -= Time.deltaTime;
+		} else {
+			isHit = false;
 		}
 
 		fillAmount = health / maxHealth;
@@ -81,24 +96,26 @@ public class PlayerScript : MonoBehaviour {
 	
 		else
 		{
-			ammoCountTotal.color = blackColor;
-			ammoCountInMagazine.color = blackColor;
-			slash.color = blackColor;
+			ammoCountTotal.color = Color.white;
+			ammoCountInMagazine.color = Color.white;
+			slash.color = Color.white;
 		}
 
+		points.text = playerScore.ToString();
 
 		if (this.health > this.maxHealth) this.health = this.maxHealth;
 	}
 
 	public void FillPowerUpDictionary() {
-		PowerUps[] powerUps = (PowerUps[])System.Enum.GetValues(typeof(PowerUps));
-		powerUps.ToList().ForEach(powerUp => powerUpBase.Add(powerUp, false));
+		(System.Enum.GetValues(typeof(PowerUps)) as PowerUps[]).ToList().ForEach(powerUp => powerUpBase.Add(powerUp, false));
 	}
 
 	public void EnablePowerUpEffect(PowerUps id) {
 		switch (id) {
 			case PowerUps.speedUp:
 				speedUpTimer = 10f;
+				GetComponent<PlayerMovement>().speed += 2f;
+				reducedSpeed = false;
 				powerUpBase[id] = true;
 				break;
 			case PowerUps.freeze:

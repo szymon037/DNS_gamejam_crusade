@@ -11,8 +11,8 @@ public class Pig : MonoBehaviour {
 	public AudioSource pigSqueal = null;
 
 	void Awake() {
-		float scale = Random.Range(3f, 4.5f);
-		this.transform.localScale = new Vector3(scale, scale, scale);
+		//float scale = Random.Range(3f, 4.5f);
+		//this.transform.localScale = new Vector3(scale, scale, scale);
 
 	}
 
@@ -42,7 +42,13 @@ public class Pig : MonoBehaviour {
 
 	void OnCollisionEnter(Collision other) {
 		if (other.gameObject.CompareTag("Player")) {
-			other.gameObject.GetComponent<PlayerScript>().health -= this.damage;
+			PlayerScript reference = other.gameObject.GetComponent<PlayerScript>();
+			if (reference.isHit == false) {
+				reference.health -= this.damage;
+				reference.hitTimer = 0.3f;
+				reference.OOF.Play();
+				reference.isHit = true;
+			}
 			pigSqueal.Play();
 		}
 	}

@@ -15,7 +15,7 @@ public class PigBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!scriptRef.powerUpBase[PlayerScript.PowerUps.freeze]) {
+		if (!PlayerScript.powerUpBase[PlayerScript.PowerUps.freeze]) {
 			transform.position = Vector3.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
 			transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
 			transform.LookAt(player.transform);

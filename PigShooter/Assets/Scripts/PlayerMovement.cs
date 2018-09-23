@@ -38,8 +38,8 @@ public class PlayerMovement : MonoBehaviour {
 
 			oldMove = move;
 
-		x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * currentSpeed;
-        z = Input.GetAxisRaw("Vertical") * Time.deltaTime * currentSpeed;
+		x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * (currentSpeed + speed);
+        z = Input.GetAxisRaw("Vertical") * Time.deltaTime * (currentSpeed + speed);
 
         transform.Translate(x, 0, z);
         player.transform.position = this.transform.position;

@@ -24,17 +24,18 @@ public class Shotgun : Weapon {
 			this.reloadTimer -= Time.deltaTime;
 		}
 		if (muzzleTimer > 0f) muzzleTimer -= Time.deltaTime;
+		
 	}
 
 	public override void Shoot() {
 		if (reloadTimer > 0f) return;
 		if (shotTimer > 0f) return;
+		//Debug.Log(PlayerScript.powerUpBase.Count);
 		this.shotTimer = this.shotDelay;
 		soundSource.Play();
 		muzzleFlash.gameObject.GetComponent<MuzzleFlash>().ps.Play();
 		//RaycastHit hit = Physics.Raycast();
 		if (this.gameObject.activeSelf) soundSource.Play();
-		if (!script.powerUpBase[PlayerScript.PowerUps.infiniteAmmo]) --this.currentAmmoCount;
 		int pelletCount = Random.Range(minPellets, maxPellets);
 		RaycastHit hit;
 		bool enemyIsHit = false;
@@ -52,6 +53,12 @@ public class Shotgun : Weapon {
 			}
 			//Debug.DrawRay(this.shootPoint.position, direction.normalized * this.range, Color.red, 20f);
 		}
+		if (!PlayerScript.powerUpBase[PlayerScript.PowerUps.infiniteAmmo]) {
+			--this.currentAmmoCount;
+		} else {
+			//Debug.Log("returning");
+			return;
+		}
 		Shake();
 	}
 
@@ -60,6 +67,21 @@ public class Shotgun : Weapon {
 		if (currentAmmoCount == 0 && ammoCount == 0) return;
 		reloadSound.Play();
 		reloadTimer = reloadDelay;
+		if (ammoCount < magCapacity) {
+			if (currentAmmoCount < magCapacity) {
+				int temp = currentAmmoCount + ammoCount;
+				if (temp > magCapacity) {
+					temp -= magCapacity;
+					ammoCount = temp;
+					currentAmmoCount = magCapacity;
+					return;
+				} else {
+					currentAmmoCount += ammoCount;
+					ammoCount = 0;
+					return;
+				}
+			}
+		}
 		if (ammoCount < magCapacity) {
 			currentAmmoCount = ammoCount;
 			ammoCount = 0;

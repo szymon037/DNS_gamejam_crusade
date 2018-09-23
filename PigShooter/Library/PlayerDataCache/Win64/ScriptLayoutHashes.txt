@@ -87,6 +87,7 @@ a44114bd4fa541174f78b4bb92bacb48 UnityEngine.UI.dll:UnityEngine.EventSystems.Sta
 e90403eeda069970e0b9de1533de13a6 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 2d58ca16854b99daea8c45e9c0f367b7 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 16da51d1b62ef6d4ee1849350434023b UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
+7f215f1b69486b5717c32dd42bb8eb71 Assembly-CSharp.dll:.InfiniteAmmoPowerup
 98ad7138b38456b68f8f7f97a1e6c8a5 Assembly-CSharp.dll:.AssaultRifle
 486cd95c82d8305219c352c06b776e1f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 9e61f3535f3c55760a1cedfbd114f4af UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -124,14 +125,15 @@ d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 98d69a140ec0084cde3b6a5e09aea295 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
+7f215f1b69486b5717c32dd42bb8eb71 Assembly-CSharp.dll:.SpeedUpPowerup
 96f3ea9f23b6f08e60710ebb4af49174 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
-f82a26ac4129e64031a65c4ef76da909 Assembly-CSharp.dll:.Pig
+e9ece21c78f87eae02f2d513b899e211 Assembly-CSharp.dll:.Pig
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 0fdc2f91cc4a4fb43594299931231cee Assembly-CSharp.dll:.CameraMovement
 486cd95c82d8305219c352c06b776e1f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 b12889c07fc62a245d14d769a4a1ce00 Assembly-CSharp.dll:.CameraRotation
 30d8b5cbff99fe0341d3960fbaa7a560 Assembly-CSharp.dll:.Shotgunammo
-b1be21e331a488358067359cce0829bd Assembly-CSharp.dll:.PlayerScript
+a634881783ec0fd45a26d615e2e4bd10 Assembly-CSharp.dll:.PlayerScript
 eaf0bcdb10d442a4029d615f41d09957 Unity.TextMeshPro.dll:TMPro.TextContainer
 c5d54cb354c81323dce7802955e6d23a Assembly-CSharp.dll:.Shotgun
 87b638bbe461aec83f3eb17823cfc2b1 Assembly-CSharp.dll:.Weapon
@@ -182,7 +184,6 @@ f7e467256a625b6f503c58cd56140fb9 Assembly-CSharp.dll:.PigBehaviour
 2f9af06a78208a67db480e9bfed4a076 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 58df49d6bbce54aa8d5f84fefc4602c6 Assembly-CSharp.dll:.AudioBehaviour
-ceac189a9e67d782556644c5e894bd9c Assembly-CSharp.dll:.GameManager
+43cba75d9aa663e3e9b4fdc2e692920c Assembly-CSharp.dll:.GameManager
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
-7f215f1b69486b5717c32dd42bb8eb71 Assembly-CSharp.dll:.SpeedUpPowerup
-7f215f1b69486b5717c32dd42bb8eb71 Assembly-CSharp.dll:.InfiniteAmmoPowerup
+b59e5bb31d5547c9ca2157a188348da9 Assembly-CSharp.dll:.AmmoRecovery

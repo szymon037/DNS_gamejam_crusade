@@ -31,7 +31,7 @@ public class Pistol : Weapon {
 		muzzleFlash.gameObject.GetComponent<MuzzleFlash>().ps.Play();
 		muzzleTimer = 0.3f;
 		this.shotTimer = this.shotDelay;
-		if (!script.powerUpBase[PlayerScript.PowerUps.infiniteAmmo]) --this.currentAmmoCount;
+		if (!PlayerScript.powerUpBase[PlayerScript.PowerUps.infiniteAmmo]) --this.currentAmmoCount;
 		RaycastHit hit;
 		soundSource.Play();
 		bool hitTheEnemy = Physics.Raycast(this.shootPoint.position, Camera.main.transform.forward * this.range, out hit, this.range);
@@ -51,6 +51,21 @@ public class Pistol : Weapon {
 		if (currentAmmoCount == 0 && ammoCount == 0) return;
 		reloadSound.Play();
 		reloadTimer = reloadDelay;
+		if (ammoCount < magCapacity) {
+			if (currentAmmoCount < magCapacity) {
+				int temp = currentAmmoCount + ammoCount;
+				if (temp > magCapacity) {
+					temp -= magCapacity;
+					ammoCount = temp;
+					currentAmmoCount = magCapacity;
+					return;
+				} else {
+					currentAmmoCount += ammoCount;
+					ammoCount = 0;
+					return;
+				}
+			}
+		}
 		if (ammoCount < magCapacity) {
 			currentAmmoCount = ammoCount;
 			ammoCount = 0;
