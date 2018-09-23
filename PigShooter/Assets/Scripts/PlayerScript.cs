@@ -22,7 +22,7 @@ public class PlayerScript : MonoBehaviour {
 	public Transform startPoint = null;
 	public GameObject gamemanager = null;
 	private float fillAmount = 1f;
-	public Image healthImage = null;
+	public Text healthImage = null;
 	public Text ammoCountInMagazine = null;
 	public Text ammoCountTotal = null;
 	public Text slash = null;
@@ -35,6 +35,8 @@ public class PlayerScript : MonoBehaviour {
 	public static int playerScore = 0;
 	private bool reducedSpeed = false;
 	public AudioSource OOF = null;
+	public int count = 0;
+	public AudioSource escape = null;
 
 
 	void Start() {
@@ -71,8 +73,8 @@ public class PlayerScript : MonoBehaviour {
 			isHit = false;
 		}
 
-		fillAmount = health / maxHealth;
-		healthImage.fillAmount = fillAmount; 
+		//fillAmount = health / maxHealth;
+	//	healthImage.fillAmount = fillAmount; 
 
 		if (ammoCountTotal != null && script != null && script.activeWeaponScript != null) {
 			ammoCountTotal.text = script.activeWeaponScript.ammoCount.ToString();
@@ -104,6 +106,20 @@ public class PlayerScript : MonoBehaviour {
 		points.text = playerScore.ToString();
 
 		if (this.health > this.maxHealth) this.health = this.maxHealth;
+
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			++count;
+		}
+
+		if (count == 1) {
+			escape.Play();
+		}
+
+		if (count == 2) {
+			Application.Quit();
+		}
+
+		healthImage.text = health.ToString();
 	}
 
 	public void FillPowerUpDictionary() {

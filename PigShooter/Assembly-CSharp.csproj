@@ -53,7 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\MainMenu.cs" />
+     <Compile Include="Assets\ExitGame.cs" />
+     <Compile Include="Assets\MainMenu\MainMenu.cs" />
      <Compile Include="Assets\Scripts\AmmoPickups\Pistolammo.cs" />
      <Compile Include="Assets\Scripts\AmmoPickups\Rifleammo.cs" />
      <Compile Include="Assets\Scripts\AmmoPickups\Shotgunammo.cs" />
@@ -63,8 +64,10 @@
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\CameraRotation.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Scripts\PigBehaviour.cs" />
+     <Compile Include="Assets\Scripts\HealthUp.cs" />
+     <Compile Include="Assets\Scripts\MusicList.cs" />
      <Compile Include="Assets\Scripts\Pigs\Pig.cs" />
+     <Compile Include="Assets\Scripts\Pigs\PigBehaviour.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\Powerups\FreezePowerUp.cs" />

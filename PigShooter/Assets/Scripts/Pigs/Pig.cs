@@ -20,7 +20,7 @@ public class Pig : MonoBehaviour {
 	}
 
 	void Update() {
-		if (health <= 0f) {
+		if (health <= 0f && !dead) {
 			Die();
 		}
 
@@ -34,15 +34,18 @@ public class Pig : MonoBehaviour {
 	public void Die() {
 		int chance = (int)(Random.value * 100f);
 		if (chance <= 10) {
-			int amountOfBacon = Random.Range(1, 4);
+			int amountOfBacon = Random.Range(1, 3);
 			for (int i = 0; i < amountOfBacon; ++i) {
-				GameObject temp = Instantiate(bacon, this.transform.position, Quaternion.identity) as GameObject;
-				temp.transform.eulerAngles = new Vector3(temp.transform.position.x + Random.Range(0, 180f), temp.transform.position.y + Random.Range(0, 180f), temp.transform.position.z + Random.Range(0, 180f));
+				GameObject temp = Instantiate(bacon, new Vector3(transform.position.x + Random.Range(-1.5f, 1.5f), 1f, transform.position.z + Random.Range(-1.5f, 1.5f)), Quaternion.identity) as GameObject;
+				//temp.transform.eulerAngles = new Vector3(temp.transform.position.x + Random.Range(0, 180f), temp.transform.position.y + Random.Range(0, 180f), temp.transform.position.z + Random.Range(0, 180f));
 			}
 		}
 		--GameManager.enemyCounter;
 		PlayerScript.playerScore += this.scoreValue;
-		Destroy(this.gameObject);
+		this.scoreValue = 0;
+		this.gameObject.GetComponent<Collider>().enabled = false;
+		this.gameObject.tag = "Untagged";
+		Destroy(this.gameObject, 1.12f);
 		dead = true;
 	}
 
@@ -56,6 +59,9 @@ public class Pig : MonoBehaviour {
 				reference.isHit = true;
 			}
 			pigSqueal.Play();
+			this.gameObject.GetComponent<Collider>().enabled = false;
+			this.gameObject.tag = "untagged";
+			Destroy(this.gameObject);
 		}
 	}
 }

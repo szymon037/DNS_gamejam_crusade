@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 
 public class GameManager : MonoBehaviour {
@@ -19,13 +20,18 @@ public class GameManager : MonoBehaviour {
 	public int minPowerUpAmount = 3;
 	public bool killedAllEnemies = false;
 	public int ammoPickUpAmount = 0;
+	public float powerUpTimer = 0f;
+	public float enemyTimer = 0f;
+	public static float startTimer = 4f;
+	private PlayerScript healthRef = null;
+	public Text startText = null;
 	// Use this for initialization
 	void Awake () {
 		//enemySpawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
 		//powerUpSpawnPoints = GameObject.FindGameObjectsWithTag("PowerUpSpawnPoint");
 		player = GameObject.FindWithTag("Player").transform;
 		StartLevel();
-
+		healthRef = player.gameObject.GetComponent<PlayerScript>();
 	}
 	
 	// Update is called once per frame
@@ -34,10 +40,34 @@ public class GameManager : MonoBehaviour {
 		// 	++levelTag;
 		// 	StartLevel();
 		// }
+		if (startTimer > 0f) startTimer -= Time.deltaTime;
+		if (powerUpTimer > 0f) {
+			powerUpTimer -= Time.deltaTime;
+		} else {
+			int choice = Random.Range(0, 2);
+			if (choice == 0) {
+				Instantiate(ammoPrefabs[Random.Range(0, ammoPrefabs.Length)], new Vector3(Random.Range(player.position.x - 30f, player.position.x + 30f), 1f, Random.Range(player.position.z - 30f, player.position.z + 30f)), Quaternion.identity);
+			} else {
+				int temp = Random.Range(0, powerUpPrefabs.Length);
+				Instantiate(powerUpPrefabs[temp], new Vector3(Random.Range(player.position.x - 30f, player.position.x + 30f), 1f, Random.Range(player.position.z - 30f, player.position.z + 30f)), Quaternion.identity);
+				powerUpTimer = (float)Random.Range(7, 13);
+			}
+		}
+		if (enemyTimer > 0f) {
+			enemyTimer -= Time.deltaTime;
+		} else {
+			int temp = Random.Range(0, pigsToSpawn.Count);
+			Instantiate(pigsToSpawn[temp], new Vector3(Random.Range(player.position.x - 30f, player.position.x + 30f), 1f, Random.Range(player.position.z - 30f, player.position.z + 30f)), Quaternion.identity);
+			enemyTimer = (float)Random.Range(3, 10);
+			++enemyCounter;
+		}
+		if (healthRef.health <= 0f) {
+			UnityEngine.SceneManagement.SceneManager.LoadScene("LostGame");
+		}
 	}
 
 	void StartLevel() {
-		//SpawnEnemies();
+		SpawnEnemies();
 		SpawnPowerUps();
 		SpawnAmmo();
 	}
@@ -52,6 +82,7 @@ public class GameManager : MonoBehaviour {
 			Instantiate(pigsToSpawn[pigIndex], new Vector3(x, 1f, z), Quaternion.identity);
 		}
 		enemyCounter = enemyAmount;
+		enemyTimer = (float)Random.Range(5, 10);
 	}
 
 	void SpawnPowerUps() {
@@ -64,6 +95,7 @@ public class GameManager : MonoBehaviour {
 			z = Random.Range(player.position.x - 30f, player.position.x + 30f);
 			Instantiate(powerUpPrefabs[powerUpIndex], new Vector3(x, 1f, z), Quaternion.identity);
 		}
+		powerUpTimer = (float)Random.Range(5, 10);
 	}
 
 	void SpawnAmmo() {
