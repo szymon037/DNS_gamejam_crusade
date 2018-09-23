@@ -9,17 +9,22 @@ public class Pig : MonoBehaviour {
 	public int scoreValue = 0;
 	public float damage = 0f;
 	public AudioSource pigSqueal = null;
+	public bool dead = false;
+	private Animator anim;
 
 	void Awake() {
 		//float scale = Random.Range(3f, 4.5f);
 		//this.transform.localScale = new Vector3(scale, scale, scale);
 
+		anim = GetComponent<Animator>();
 	}
 
 	void Update() {
 		if (health <= 0f) {
 			Die();
 		}
+
+		anim.SetBool("isDead", dead);
 	}
 
 	public void ReduceHealth(float value) {
@@ -38,6 +43,7 @@ public class Pig : MonoBehaviour {
 		--GameManager.enemyCounter;
 		PlayerScript.playerScore += this.scoreValue;
 		Destroy(this.gameObject);
+		dead = true;
 	}
 
 	void OnCollisionEnter(Collision other) {
